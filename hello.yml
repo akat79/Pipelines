@@ -1,0 +1,12 @@
+---
+jobs:
+- name: test-job
+  plan:
+  - in_parallel:
+    - get: platform-automation-tasks
+      params: { unpack: true }
+    - get: platform-automation-image
+      params: { unpack: true }
+  - task: test
+    file: platform-automation-tasks/tasks/test.yml
+    image: platform-automation-image
